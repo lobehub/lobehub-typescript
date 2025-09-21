@@ -26,12 +26,10 @@ The full API of this library can be found in [api.md](api.md).
 import Lobehub from 'lobehub';
 
 const client = new Lobehub({
-  apiKey: process.env['PETSTORE_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['LOBEHUB_API_KEY'], // This is the default and can be omitted
 });
 
-const order = await client.store.orders.create({ petId: 1, quantity: 1, status: 'placed' });
-
-console.log(order.id);
+const apiResponseUser = await client.users.retrieveCurrent();
 ```
 
 ### Request & Response types
@@ -43,13 +41,42 @@ This library includes TypeScript definitions for all request params and response
 import Lobehub from 'lobehub';
 
 const client = new Lobehub({
-  apiKey: process.env['PETSTORE_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['LOBEHUB_API_KEY'], // This is the default and can be omitted
 });
 
-const response: Lobehub.StoreListInventoryResponse = await client.store.listInventory();
+const apiResponseUser: Lobehub.APIResponseUser = await client.users.retrieveCurrent();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
+
+## File uploads
+
+Request parameters that correspond to file uploads can be passed in many different forms:
+
+- `File` (or an object with the same structure)
+- a `fetch` `Response` (or an object with the same structure)
+- an `fs.ReadStream`
+- the return value of our `toFile` helper
+
+```ts
+import fs from 'fs';
+import Lobehub, { toFile } from 'lobehub';
+
+const client = new Lobehub();
+
+// If you have access to Node `fs` we recommend using `fs.createReadStream()`:
+await client.files.upload({ file: fs.createReadStream('/path/to/file') });
+
+// Or if you have the web `File` API you can pass a `File` instance:
+await client.files.upload({ file: new File(['my bytes'], 'file') });
+
+// You can also pass a `fetch` `Response`:
+await client.files.upload({ file: await fetch('https://somesite/file') });
+
+// Finally, if none of the above are convenient, you can use our `toFile` helper:
+await client.files.upload({ file: await toFile(Buffer.from('my bytes'), 'file') });
+await client.files.upload({ file: await toFile(new Uint8Array([0, 1, 2]), 'file') });
+```
 
 ## Handling errors
 
@@ -59,7 +86,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.store.listInventory().catch(async (err) => {
+const apiResponseUser = await client.users.retrieveCurrent().catch(async (err) => {
   if (err instanceof Lobehub.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -99,7 +126,7 @@ const client = new Lobehub({
 });
 
 // Or, configure per-request:
-await client.store.listInventory({
+await client.users.retrieveCurrent({
   maxRetries: 5,
 });
 ```
@@ -116,7 +143,7 @@ const client = new Lobehub({
 });
 
 // Override per-request:
-await client.store.listInventory({
+await client.users.retrieveCurrent({
   timeout: 5 * 1000,
 });
 ```
@@ -139,13 +166,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Lobehub();
 
-const response = await client.store.listInventory().asResponse();
+const response = await client.users.retrieveCurrent().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.store.listInventory().withResponse();
+const { data: apiResponseUser, response: raw } = await client.users.retrieveCurrent().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response);
+console.log(apiResponseUser);
 ```
 
 ### Logging
@@ -225,7 +252,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.store.orders.create({
+client.users.retrieveCurrent({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
