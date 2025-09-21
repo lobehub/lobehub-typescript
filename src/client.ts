@@ -11,36 +11,142 @@ import type { APIResponseProps } from './internal/parse';
 import { getPlatformHeaders } from './internal/detect-platform';
 import * as Shims from './internal/shims';
 import * as Opts from './internal/request-options';
-import * as qs from './internal/qs';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
-  Category,
-  Pet,
-  PetCreateParams,
-  PetFindByStatusParams,
-  PetFindByStatusResponse,
-  PetFindByTagsParams,
-  PetFindByTagsResponse,
-  PetUpdateByIDParams,
-  PetUpdateParams,
-  PetUploadImageParams,
-  PetUploadImageResponse,
-  Pets,
-} from './resources/pets';
+  APIResponseAgent,
+  Agent,
+  AgentCreateParams,
+  AgentListParams,
+  AgentListResponse,
+  AgentUpdateParams,
+  Agents,
+  CreateAgent,
+} from './resources/agents';
 import {
-  User,
+  APIResponseFileDetail,
+  File,
+  FileBatchGetParams,
+  FileBatchGetResponse,
+  FileBatchUploadParams,
+  FileBatchUploadResponse,
+  FileDetail,
+  FileGetPresignedURLParams,
+  FileGetPresignedURLResponse,
+  FileListParams,
+  FileListResponse,
+  FileParse,
+  FileParseContentParams,
+  FileParseContentResponse,
+  FileUploadParams,
+  Files,
+} from './resources/files';
+import {
+  APIResponseTranslation,
+  MessageTranslationTranslateParams,
+  MessageTranslationUpdateParams,
+  MessageTranslations,
+  TranslateTrigger,
+} from './resources/message-translations';
+import {
+  APIResponseMessage,
+  CreateMessageRequest,
+  Message,
+  MessageCountParams,
+  MessageCountResponse,
+  MessageCreateParams,
+  MessageDeleteBatchParams,
+  MessageDeleteBatchResponse,
+  MessageListParams,
+  MessageListResponse,
+  MessageRepiesParams,
+  Messages,
+} from './resources/messages';
+import {
+  APIResponse,
+  CreateModel,
+  Model,
+  ModelCreateParams,
+  ModelListParams,
+  ModelListResponse,
+  ModelRetrieveParams,
+  ModelUpdateParams,
+  Models,
+} from './resources/models';
+import {
+  APIResponsePermission,
+  CreatePermission,
+  Permission,
+  PermissionCreateParams,
+  PermissionListParams,
+  PermissionListResponse,
+  PermissionUpdateParams,
+  Permissions,
+} from './resources/permissions';
+import {
+  APIResponseProvider,
+  CreateProvider,
+  Provider,
+  ProviderCreateParams,
+  ProviderListParams,
+  ProviderListResponse,
+  ProviderUpdateParams,
+  Providers,
+} from './resources/providers';
+import {
+  APIResponseSessionGroup,
+  SessionGroup,
+  SessionGroupCreateParams,
+  SessionGroupListResponse,
+  SessionGroupUpdateParams,
+  SessionGroups,
+} from './resources/session-groups';
+import {
+  APIResponseSession,
+  APIResponseSessionList,
+  Session,
+  SessionBatchUpdateParams,
+  SessionCreateParams,
+  SessionListGroupsParams,
+  SessionListGroupsResponse,
+  SessionListParams,
+  SessionUpdateParams,
+  Sessions,
+  UpdateSessionRequest,
+} from './resources/sessions';
+import {
+  APIResponseTopic,
+  Topic,
+  TopicCreateParams,
+  TopicListParams,
+  TopicListResponse,
+  TopicUpdateParams,
+  Topics,
+} from './resources/topics';
+import {
+  APIResponseRole,
+  CreateRoleRequest,
+  Role,
+  RoleCreateParams,
+  RoleListParams,
+  RoleListResponse,
+  RoleUpdateParams,
+  Roles,
+} from './resources/roles/roles';
+import {
+  APIResponseBase,
+  APIResponseUser,
+  APIResponseVoid,
   UserCreateParams,
-  UserCreateWithListParams,
-  UserLoginParams,
-  UserLoginResponse,
+  UserListParams,
+  UserListResponse,
   UserUpdateParams,
+  UserWithRoles,
   Users,
-} from './resources/users';
-import { Store, StoreListInventoryResponse } from './resources/store/store';
+} from './resources/users/users';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -56,7 +162,7 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['PETSTORE_API_KEY'].
+   * Defaults to process.env['LOBEHUB_API_KEY'].
    */
   apiKey?: string | undefined;
 
@@ -150,8 +256,8 @@ export class Lobehub {
   /**
    * API Client for interfacing with the Lobehub API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['PETSTORE_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['LOBEHUB_BASE_URL'] ?? https://petstore3.swagger.io/api/v3] - Override the default base URL for the API.
+   * @param {string | undefined} [opts.apiKey=process.env['LOBEHUB_API_KEY'] ?? undefined]
+   * @param {string} [opts.baseURL=process.env['LOBEHUB_BASE_URL'] ?? /api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -161,19 +267,19 @@ export class Lobehub {
    */
   constructor({
     baseURL = readEnv('LOBEHUB_BASE_URL'),
-    apiKey = readEnv('PETSTORE_API_KEY'),
+    apiKey = readEnv('LOBEHUB_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.LobehubError(
-        "The PETSTORE_API_KEY environment variable is missing or empty; either provide it, or instantiate the Lobehub client with an apiKey option, like new Lobehub({ apiKey: 'My API Key' }).",
+        "The LOBEHUB_API_KEY environment variable is missing or empty; either provide it, or instantiate the Lobehub client with an apiKey option, like new Lobehub({ apiKey: 'My API Key' }).",
       );
     }
 
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://petstore3.swagger.io/api/v3`,
+      baseURL: baseURL || `/api/v1`,
     };
 
     this.baseURL = options.baseURL!;
@@ -219,7 +325,7 @@ export class Lobehub {
    * Check whether the base URL is set to its default.
    */
   #baseURLOverridden(): boolean {
-    return this.baseURL !== 'https://petstore3.swagger.io/api/v3';
+    return this.baseURL !== '/api/v1';
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
@@ -231,11 +337,27 @@ export class Lobehub {
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ api_key: this.apiKey }]);
+    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
+  /**
+   * Basic re-implementation of `qs.stringify` for primitive types.
+   */
   protected stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { arrayFormat: 'comma' });
+    return Object.entries(query)
+      .filter(([_, value]) => typeof value !== 'undefined')
+      .map(([key, value]) => {
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+          return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+        }
+        if (value === null) {
+          return `${encodeURIComponent(key)}=`;
+        }
+        throw new Errors.LobehubError(
+          `Cannot stringify type ${typeof value}; Expected string, number, boolean, or null. If you need to pass nested query parameters, you can manually encode them, e.g. { query: { 'foo[key1]': value1, 'foo[key2]': value2 } }, and please open a GitHub issue requesting better support for your use case.`,
+        );
+      })
+      .join('&');
   }
 
   private getUserAgent(): string {
@@ -722,44 +844,176 @@ export class Lobehub {
 
   static toFile = Uploads.toFile;
 
-  pets: API.Pets = new API.Pets(this);
-  store: API.Store = new API.Store(this);
   users: API.Users = new API.Users(this);
+  agents: API.Agents = new API.Agents(this);
+  files: API.Files = new API.Files(this);
+  messages: API.Messages = new API.Messages(this);
+  messageTranslations: API.MessageTranslations = new API.MessageTranslations(this);
+  models: API.Models = new API.Models(this);
+  permissions: API.Permissions = new API.Permissions(this);
+  providers: API.Providers = new API.Providers(this);
+  roles: API.Roles = new API.Roles(this);
+  sessionGroups: API.SessionGroups = new API.SessionGroups(this);
+  sessions: API.Sessions = new API.Sessions(this);
+  topics: API.Topics = new API.Topics(this);
 }
 
-Lobehub.Pets = Pets;
-Lobehub.Store = Store;
 Lobehub.Users = Users;
+Lobehub.Agents = Agents;
+Lobehub.Files = Files;
+Lobehub.Messages = Messages;
+Lobehub.MessageTranslations = MessageTranslations;
+Lobehub.Models = Models;
+Lobehub.Permissions = Permissions;
+Lobehub.Providers = Providers;
+Lobehub.Roles = Roles;
+Lobehub.SessionGroups = SessionGroups;
+Lobehub.Sessions = Sessions;
+Lobehub.Topics = Topics;
 
 export declare namespace Lobehub {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    Pets as Pets,
-    type Category as Category,
-    type Pet as Pet,
-    type PetFindByStatusResponse as PetFindByStatusResponse,
-    type PetFindByTagsResponse as PetFindByTagsResponse,
-    type PetUploadImageResponse as PetUploadImageResponse,
-    type PetCreateParams as PetCreateParams,
-    type PetUpdateParams as PetUpdateParams,
-    type PetFindByStatusParams as PetFindByStatusParams,
-    type PetFindByTagsParams as PetFindByTagsParams,
-    type PetUpdateByIDParams as PetUpdateByIDParams,
-    type PetUploadImageParams as PetUploadImageParams,
-  };
-
-  export { Store as Store, type StoreListInventoryResponse as StoreListInventoryResponse };
-
-  export {
     Users as Users,
-    type User as User,
-    type UserLoginResponse as UserLoginResponse,
+    type APIResponseBase as APIResponseBase,
+    type APIResponseUser as APIResponseUser,
+    type APIResponseVoid as APIResponseVoid,
+    type UserWithRoles as UserWithRoles,
+    type UserListResponse as UserListResponse,
     type UserCreateParams as UserCreateParams,
     type UserUpdateParams as UserUpdateParams,
-    type UserCreateWithListParams as UserCreateWithListParams,
-    type UserLoginParams as UserLoginParams,
+    type UserListParams as UserListParams,
   };
 
-  export type Order = API.Order;
+  export {
+    Agents as Agents,
+    type Agent as Agent,
+    type APIResponseAgent as APIResponseAgent,
+    type CreateAgent as CreateAgent,
+    type AgentListResponse as AgentListResponse,
+    type AgentCreateParams as AgentCreateParams,
+    type AgentUpdateParams as AgentUpdateParams,
+    type AgentListParams as AgentListParams,
+  };
+
+  export {
+    Files as Files,
+    type APIResponseFileDetail as APIResponseFileDetail,
+    type File as File,
+    type FileDetail as FileDetail,
+    type FileParse as FileParse,
+    type FileListResponse as FileListResponse,
+    type FileBatchGetResponse as FileBatchGetResponse,
+    type FileBatchUploadResponse as FileBatchUploadResponse,
+    type FileGetPresignedURLResponse as FileGetPresignedURLResponse,
+    type FileParseContentResponse as FileParseContentResponse,
+    type FileListParams as FileListParams,
+    type FileBatchGetParams as FileBatchGetParams,
+    type FileBatchUploadParams as FileBatchUploadParams,
+    type FileGetPresignedURLParams as FileGetPresignedURLParams,
+    type FileParseContentParams as FileParseContentParams,
+    type FileUploadParams as FileUploadParams,
+  };
+
+  export {
+    Messages as Messages,
+    type APIResponseMessage as APIResponseMessage,
+    type CreateMessageRequest as CreateMessageRequest,
+    type Message as Message,
+    type MessageListResponse as MessageListResponse,
+    type MessageCountResponse as MessageCountResponse,
+    type MessageDeleteBatchResponse as MessageDeleteBatchResponse,
+    type MessageCreateParams as MessageCreateParams,
+    type MessageListParams as MessageListParams,
+    type MessageCountParams as MessageCountParams,
+    type MessageDeleteBatchParams as MessageDeleteBatchParams,
+    type MessageRepiesParams as MessageRepiesParams,
+  };
+
+  export {
+    MessageTranslations as MessageTranslations,
+    type APIResponseTranslation as APIResponseTranslation,
+    type TranslateTrigger as TranslateTrigger,
+    type MessageTranslationUpdateParams as MessageTranslationUpdateParams,
+    type MessageTranslationTranslateParams as MessageTranslationTranslateParams,
+  };
+
+  export {
+    Models as Models,
+    type APIResponse as APIResponse,
+    type CreateModel as CreateModel,
+    type Model as Model,
+    type ModelListResponse as ModelListResponse,
+    type ModelCreateParams as ModelCreateParams,
+    type ModelRetrieveParams as ModelRetrieveParams,
+    type ModelUpdateParams as ModelUpdateParams,
+    type ModelListParams as ModelListParams,
+  };
+
+  export {
+    Permissions as Permissions,
+    type APIResponsePermission as APIResponsePermission,
+    type CreatePermission as CreatePermission,
+    type Permission as Permission,
+    type PermissionListResponse as PermissionListResponse,
+    type PermissionCreateParams as PermissionCreateParams,
+    type PermissionUpdateParams as PermissionUpdateParams,
+    type PermissionListParams as PermissionListParams,
+  };
+
+  export {
+    Providers as Providers,
+    type APIResponseProvider as APIResponseProvider,
+    type CreateProvider as CreateProvider,
+    type Provider as Provider,
+    type ProviderListResponse as ProviderListResponse,
+    type ProviderCreateParams as ProviderCreateParams,
+    type ProviderUpdateParams as ProviderUpdateParams,
+    type ProviderListParams as ProviderListParams,
+  };
+
+  export {
+    Roles as Roles,
+    type APIResponseRole as APIResponseRole,
+    type CreateRoleRequest as CreateRoleRequest,
+    type Role as Role,
+    type RoleListResponse as RoleListResponse,
+    type RoleCreateParams as RoleCreateParams,
+    type RoleUpdateParams as RoleUpdateParams,
+    type RoleListParams as RoleListParams,
+  };
+
+  export {
+    SessionGroups as SessionGroups,
+    type APIResponseSessionGroup as APIResponseSessionGroup,
+    type SessionGroup as SessionGroup,
+    type SessionGroupListResponse as SessionGroupListResponse,
+    type SessionGroupCreateParams as SessionGroupCreateParams,
+    type SessionGroupUpdateParams as SessionGroupUpdateParams,
+  };
+
+  export {
+    Sessions as Sessions,
+    type APIResponseSession as APIResponseSession,
+    type APIResponseSessionList as APIResponseSessionList,
+    type Session as Session,
+    type UpdateSessionRequest as UpdateSessionRequest,
+    type SessionListGroupsResponse as SessionListGroupsResponse,
+    type SessionCreateParams as SessionCreateParams,
+    type SessionUpdateParams as SessionUpdateParams,
+    type SessionListParams as SessionListParams,
+    type SessionBatchUpdateParams as SessionBatchUpdateParams,
+    type SessionListGroupsParams as SessionListGroupsParams,
+  };
+
+  export {
+    Topics as Topics,
+    type APIResponseTopic as APIResponseTopic,
+    type Topic as Topic,
+    type TopicListResponse as TopicListResponse,
+    type TopicCreateParams as TopicCreateParams,
+    type TopicUpdateParams as TopicUpdateParams,
+    type TopicListParams as TopicListParams,
+  };
 }
