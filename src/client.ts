@@ -88,7 +88,7 @@ import {
 } from './resources/permissions';
 import {
   APIResponseProvider,
-  CreateProvider,
+  CreateProviderRequest,
   Provider,
   ProviderCreateParams,
   ProviderListParams,
@@ -110,8 +110,8 @@ import {
   Session,
   SessionBatchUpdateParams,
   SessionCreateParams,
-  SessionListGroupsParams,
-  SessionListGroupsResponse,
+  SessionListGroupedByAgentParams,
+  SessionListGroupedByAgentResponse,
   SessionListParams,
   SessionUpdateParams,
   Sessions,
@@ -965,7 +965,7 @@ export declare namespace Lobehub {
   export {
     Providers as Providers,
     type APIResponseProvider as APIResponseProvider,
-    type CreateProvider as CreateProvider,
+    type CreateProviderRequest as CreateProviderRequest,
     type Provider as Provider,
     type ProviderListResponse as ProviderListResponse,
     type ProviderCreateParams as ProviderCreateParams,
@@ -999,12 +999,12 @@ export declare namespace Lobehub {
     type APIResponseSessionList as APIResponseSessionList,
     type Session as Session,
     type UpdateSessionRequest as UpdateSessionRequest,
-    type SessionListGroupsResponse as SessionListGroupsResponse,
+    type SessionListGroupedByAgentResponse as SessionListGroupedByAgentResponse,
     type SessionCreateParams as SessionCreateParams,
     type SessionUpdateParams as SessionUpdateParams,
     type SessionListParams as SessionListParams,
     type SessionBatchUpdateParams as SessionBatchUpdateParams,
-    type SessionListGroupsParams as SessionListGroupsParams,
+    type SessionListGroupedByAgentParams as SessionListGroupedByAgentParams,
   };
 
   export {

@@ -26,8 +26,8 @@ Types:
 
 Methods:
 
-- <code title="get /users/{id}/roles">client.users.roles.<a href="./src/resources/users/roles.ts">retrieve</a>(id) -> APIResponseUserRoles</code>
 - <code title="patch /users/{id}/roles">client.users.roles.<a href="./src/resources/users/roles.ts">update</a>(id, { ...params }) -> APIResponseUserRoles</code>
+- <code title="get /users/{id}/roles">client.users.roles.<a href="./src/resources/users/roles.ts">list</a>(id) -> APIResponseUserRoles</code>
 - <code title="delete /users/{id}/roles">client.users.roles.<a href="./src/resources/users/roles.ts">clear</a>(id) -> RoleClearResponse</code>
 
 # Agents
@@ -145,7 +145,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/providers.ts">APIResponseProvider</a></code>
-- <code><a href="./src/resources/providers.ts">CreateProvider</a></code>
+- <code><a href="./src/resources/providers.ts">CreateProviderRequest</a></code>
 - <code><a href="./src/resources/providers.ts">Provider</a></code>
 - <code><a href="./src/resources/providers.ts">ProviderListResponse</a></code>
 
@@ -210,7 +210,7 @@ Types:
 - <code><a href="./src/resources/sessions.ts">APIResponseSessionList</a></code>
 - <code><a href="./src/resources/sessions.ts">Session</a></code>
 - <code><a href="./src/resources/sessions.ts">UpdateSessionRequest</a></code>
-- <code><a href="./src/resources/sessions.ts">SessionListGroupsResponse</a></code>
+- <code><a href="./src/resources/sessions.ts">SessionListGroupedByAgentResponse</a></code>
 
 Methods:
 
@@ -220,7 +220,7 @@ Methods:
 - <code title="get /sessions">client.sessions.<a href="./src/resources/sessions.ts">list</a>({ ...params }) -> APIResponseSessionList</code>
 - <code title="delete /sessions/{id}">client.sessions.<a href="./src/resources/sessions.ts">delete</a>(id) -> APIResponseVoid</code>
 - <code title="patch /sessions">client.sessions.<a href="./src/resources/sessions.ts">batchUpdate</a>([ ...body ]) -> APIResponseSessionList</code>
-- <code title="get /sessions/groups">client.sessions.<a href="./src/resources/sessions.ts">listGroups</a>({ ...params }) -> SessionListGroupsResponse</code>
+- <code title="get /sessions/groups">client.sessions.<a href="./src/resources/sessions.ts">listGroupedByAgent</a>({ ...params }) -> SessionListGroupedByAgentResponse</code>
 
 # Topics
 
