@@ -1,5 +1,5 @@
 {
-  "name": "lobehub",
+  "name": "@mocha/lobechat-openapi",
   "version": "0.0.1",
   "description": "The official TypeScript library for the Lobehub API",
   "author": "Lobehub <>",

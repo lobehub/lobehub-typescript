@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "lobehub/*": ["dist/src/*"],
-      "lobehub": ["dist/src/index.ts"]
+      "@mocha/lobechat-openapi/*": ["dist/src/*"],
+      "@mocha/lobechat-openapi": ["dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

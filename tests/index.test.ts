@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'lobehub/core/api-promise';
+import { APIPromise } from '@mocha/lobechat-openapi/core/api-promise';
 
 import util from 'node:util';
-import Lobehub from 'lobehub';
-import { APIUserAbortError } from 'lobehub';
+import Lobehub from '@mocha/lobechat-openapi';
+import { APIUserAbortError } from '@mocha/lobechat-openapi';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
