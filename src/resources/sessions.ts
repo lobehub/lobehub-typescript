@@ -61,10 +61,10 @@ export class Sessions extends APIResource {
   /**
    * List sessions grouped by agent
    */
-  listGroups(
-    query: SessionListGroupsParams,
+  listGroupedByAgent(
+    query: SessionListGroupedByAgentParams,
     options?: RequestOptions,
-  ): APIPromise<SessionListGroupsResponse> {
+  ): APIPromise<SessionListGroupedByAgentResponse> {
     return this._client.get('/sessions/groups', { query, ...options });
   }
 }
@@ -125,11 +125,11 @@ export interface UpdateSessionRequest {
   userId?: string | null;
 }
 
-export interface SessionListGroupsResponse extends UsersAPI.APIResponseBase {
-  data?: Array<SessionListGroupsResponse.Data>;
+export interface SessionListGroupedByAgentResponse extends UsersAPI.APIResponseBase {
+  data?: Array<SessionListGroupedByAgentResponse.Data>;
 }
 
-export namespace SessionListGroupsResponse {
+export namespace SessionListGroupedByAgentResponse {
   export interface Data {
     sessions: Array<SessionsAPI.Session>;
 
@@ -208,7 +208,7 @@ export namespace SessionBatchUpdateParams {
   }
 }
 
-export interface SessionListGroupsParams {
+export interface SessionListGroupedByAgentParams {
   groupBy: 'agent';
 }
 
@@ -218,11 +218,11 @@ export declare namespace Sessions {
     type APIResponseSessionList as APIResponseSessionList,
     type Session as Session,
     type UpdateSessionRequest as UpdateSessionRequest,
-    type SessionListGroupsResponse as SessionListGroupsResponse,
+    type SessionListGroupedByAgentResponse as SessionListGroupedByAgentResponse,
     type SessionCreateParams as SessionCreateParams,
     type SessionUpdateParams as SessionUpdateParams,
     type SessionListParams as SessionListParams,
     type SessionBatchUpdateParams as SessionBatchUpdateParams,
-    type SessionListGroupsParams as SessionListGroupsParams,
+    type SessionListGroupedByAgentParams as SessionListGroupedByAgentParams,
   };
 }

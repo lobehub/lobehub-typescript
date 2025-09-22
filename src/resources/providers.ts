@@ -55,7 +55,7 @@ export interface APIResponseProvider extends UsersAPI.APIResponseBase {
   data?: Provider;
 }
 
-export interface CreateProvider {
+export interface CreateProviderRequest {
   id: string;
 
   checkModel?: string | null;
@@ -188,7 +188,7 @@ export interface ProviderListParams {
 export declare namespace Providers {
   export {
     type APIResponseProvider as APIResponseProvider,
-    type CreateProvider as CreateProvider,
+    type CreateProviderRequest as CreateProviderRequest,
     type Provider as Provider,
     type ProviderListResponse as ProviderListResponse,
     type ProviderCreateParams as ProviderCreateParams,

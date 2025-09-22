@@ -9,8 +9,8 @@ const client = new Lobehub({
 
 describe('resource roles', () => {
   // Prism tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.users.roles.retrieve('id');
+  test.skip('update', async () => {
+    const responsePromise = client.users.roles.update('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,8 @@ describe('resource roles', () => {
   });
 
   // Prism tests are disabled
-  test.skip('update', async () => {
-    const responsePromise = client.users.roles.update('id', {});
+  test.skip('list', async () => {
+    const responsePromise = client.users.roles.list('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

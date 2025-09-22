@@ -73,7 +73,7 @@ export {
 export {
   Providers,
   type APIResponseProvider,
-  type CreateProvider,
+  type CreateProviderRequest,
   type Provider,
   type ProviderListResponse,
   type ProviderCreateParams,
@@ -104,12 +104,12 @@ export {
   type APIResponseSessionList,
   type Session,
   type UpdateSessionRequest,
-  type SessionListGroupsResponse,
+  type SessionListGroupedByAgentResponse,
   type SessionCreateParams,
   type SessionUpdateParams,
   type SessionListParams,
   type SessionBatchUpdateParams,
-  type SessionListGroupsParams,
+  type SessionListGroupedByAgentParams,
 } from './sessions';
 export {
   Topics,

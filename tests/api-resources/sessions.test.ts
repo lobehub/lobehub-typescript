@@ -113,8 +113,8 @@ describe('resource sessions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('listGroups: only required params', async () => {
-    const responsePromise = client.sessions.listGroups({ groupBy: 'agent' });
+  test.skip('listGroupedByAgent: only required params', async () => {
+    const responsePromise = client.sessions.listGroupedByAgent({ groupBy: 'agent' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -125,7 +125,7 @@ describe('resource sessions', () => {
   });
 
   // Prism tests are disabled
-  test.skip('listGroups: required and optional params', async () => {
-    const response = await client.sessions.listGroups({ groupBy: 'agent' });
+  test.skip('listGroupedByAgent: required and optional params', async () => {
+    const response = await client.sessions.listGroupedByAgent({ groupBy: 'agent' });
   });
 });

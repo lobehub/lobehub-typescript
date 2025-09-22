@@ -8,17 +8,17 @@ import { path } from '../../internal/utils/path';
 
 export class Roles extends APIResource {
   /**
-   * Get user roles
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<APIResponseUserRoles> {
-    return this._client.get(path`/users/${id}/roles`, options);
-  }
-
-  /**
    * Update user roles (add/remove)
    */
   update(id: string, body: RoleUpdateParams, options?: RequestOptions): APIPromise<APIResponseUserRoles> {
     return this._client.patch(path`/users/${id}/roles`, { body, ...options });
+  }
+
+  /**
+   * Get user roles
+   */
+  list(id: string, options?: RequestOptions): APIPromise<APIResponseUserRoles> {
+    return this._client.get(path`/users/${id}/roles`, options);
   }
 
   /**
