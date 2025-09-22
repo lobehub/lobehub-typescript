@@ -74,14 +74,7 @@ export interface APIResponseVoid extends APIResponseBase {
   /**
    * Empty response payload
    */
-  data?: APIResponseVoid.Data | null;
-}
-
-export namespace APIResponseVoid {
-  /**
-   * Empty response payload
-   */
-  export interface Data {}
+  data?: unknown | null;
 }
 
 export interface UserWithRoles {
