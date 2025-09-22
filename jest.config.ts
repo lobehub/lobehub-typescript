@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^@mocha/lobechat-openapi$': '<rootDir>/src/index.ts',
-    '^@mocha/lobechat-openapi/(.*)$': '<rootDir>/src/$1',
+    '^lobehub$': '<rootDir>/src/index.ts',
+    '^lobehub/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',

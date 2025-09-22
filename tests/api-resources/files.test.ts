@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Lobehub, { toFile } from '@mocha/lobechat-openapi';
+import Lobehub, { toFile } from 'lobehub';
 
 const client = new Lobehub({
   apiKey: 'My API Key',
