@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^@mocha/lobechat-openapi(/.*)?',
+              regex: '^lobehub(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

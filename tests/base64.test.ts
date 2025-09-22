@@ -1,4 +1,4 @@
-import { fromBase64, toBase64 } from '@mocha/lobechat-openapi/internal/utils/base64';
+import { fromBase64, toBase64 } from 'lobehub/internal/utils/base64';
 
 describe.each(['Buffer', 'atob'])('with %s', (mode) => {
   let originalBuffer: BufferConstructor;

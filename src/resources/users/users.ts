@@ -71,7 +71,10 @@ export interface APIResponseUser extends APIResponseBase {
 }
 
 export interface APIResponseVoid extends APIResponseBase {
-  data?: unknown;
+  /**
+   * Empty response payload
+   */
+  data?: unknown | null;
 }
 
 export interface UserWithRoles {
