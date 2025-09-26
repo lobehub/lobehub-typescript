@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "lobehub/*": ["dist/src/*"],
-      "lobehub": ["dist/src/index.ts"]
+      "lobehub/*": ["./dist/src/*"],
+      "lobehub": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,
