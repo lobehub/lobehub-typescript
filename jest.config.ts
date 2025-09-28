@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^lobehub$': '<rootDir>/src/index.ts',
-    '^lobehub/(.*)$': '<rootDir>/src/$1',
+    '^@lobehub/openapi-typescript$': '<rootDir>/src/index.ts',
+    '^@lobehub/openapi-typescript/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',

@@ -1,5 +1,5 @@
 {
-  "name": "lobehub",
+  "name": "@lobehub/openapi-typescript",
   "version": "1.0.0",
   "description": "The official TypeScript library for the Lobehub API",
   "author": "Lobehub <>",
