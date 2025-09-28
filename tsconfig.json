@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "lobehub/*": ["./src/*"],
-      "lobehub": ["./src/index.ts"]
+      "@lobehub/openapi-typescript/*": ["./src/*"],
+      "@lobehub/openapi-typescript": ["./src/index.ts"]
     },
     "noEmit": true,
 

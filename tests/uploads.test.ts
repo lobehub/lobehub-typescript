@@ -1,6 +1,6 @@
 import fs from 'fs';
-import type { ResponseLike } from 'lobehub/internal/to-file';
-import { toFile } from 'lobehub/core/uploads';
+import type { ResponseLike } from '@lobehub/openapi-typescript/internal/to-file';
+import { toFile } from '@lobehub/openapi-typescript/core/uploads';
 import { File } from 'node:buffer';
 
 class MyClass {
@@ -97,7 +97,7 @@ describe('missing File error message', () => {
   });
 
   test('is thrown', async () => {
-    const uploads = await import('lobehub/core/uploads');
+    const uploads = await import('@lobehub/openapi-typescript/core/uploads');
     await expect(
       uploads.toFile(mockResponse({ url: 'https://example.com/my/audio.mp3' })),
     ).rejects.toMatchInlineSnapshot(

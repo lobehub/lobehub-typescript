@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^lobehub(/.*)?',
+              regex: '^@lobehub/openapi-typescript(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

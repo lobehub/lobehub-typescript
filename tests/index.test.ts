@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'lobehub/core/api-promise';
+import { APIPromise } from '@lobehub/openapi-typescript/core/api-promise';
 
 import util from 'node:util';
-import Lobehub from 'lobehub';
-import { APIUserAbortError } from 'lobehub';
+import Lobehub from '@lobehub/openapi-typescript';
+import { APIUserAbortError } from '@lobehub/openapi-typescript';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
