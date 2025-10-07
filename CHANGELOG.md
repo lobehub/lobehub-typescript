@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.1 (2025-10-07)
+
+Full Changelog: [v1.1.0...v1.1.1](https://github.com/lobehub/lobehub-typescript/compare/v1.1.0...v1.1.1)
+
+### Chores
+
+* **internal:** remove .eslintcache ([7df328f](https://github.com/lobehub/lobehub-typescript/commit/7df328fae80d7c274ecf561d420000ee92f04834))
+* **internal:** use npm pack for build uploads ([aaaef3e](https://github.com/lobehub/lobehub-typescript/commit/aaaef3eb9c39559f343dcb7dfea441cd3cb15281))
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([79e9c71](https://github.com/lobehub/lobehub-typescript/commit/79e9c71cc05facd6bd53770bbffd91d3a378e81d))
+
 ## 1.1.0 (2025-09-28)
 
 Full Changelog: [v1.0.0...v1.1.0](https://github.com/lobehub/lobehub-typescript/compare/v1.0.0...v1.1.0)
