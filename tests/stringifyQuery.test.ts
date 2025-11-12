@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Lobehub } from '@lobehub/openapi-typescript';
+import { Lobehub } from 'lobehub';
 
 const { stringifyQuery } = Lobehub.prototype as any;
 

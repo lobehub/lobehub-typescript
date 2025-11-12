@@ -55,12 +55,12 @@ $ cd lobehub-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link @lobehub/openapi-typescript
+$ yarn link lobehub
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @lobehub/openapi-typescript
+$ pnpm link -—global lobehub
 ```
 
 ## Running tests
