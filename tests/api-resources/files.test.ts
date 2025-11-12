@@ -94,7 +94,6 @@ describe('resource files', () => {
       knowledgeBaseId: 'knowledgeBaseId',
       sessionId: 'sessionId',
       skipCheckFileType: true,
-      skipExist: true,
     });
   });
 
@@ -114,7 +113,7 @@ describe('resource files', () => {
   test.skip('getPresignedURL: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.files.getPresignedURL('id', { expiresIn: 0 }, { path: '/_stainless_unknown_path' }),
+      client.files.getPresignedURL('id', { expiresIn: 1 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Lobehub.NotFoundError);
   });
 
@@ -160,7 +159,6 @@ describe('resource files', () => {
       knowledgeBaseId: 'knowledgeBaseId',
       sessionId: 'sessionId',
       skipCheckFileType: true,
-      skipExist: true,
     });
   });
 });
