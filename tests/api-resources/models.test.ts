@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Lobehub from '@lobehub/openapi-typescript';
+import Lobehub from 'lobehub';
 
 const client = new Lobehub({
   apiKey: 'My API Key',
@@ -115,7 +115,14 @@ describe('resource models', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.models.list({ keyword: 'keyword', page: 1, pageSize: 1 }, { path: '/_stainless_unknown_path' }),
+      client.models.list(
+        {
+          keyword: 'keyword',
+          page: 1,
+          pageSize: 1,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Lobehub.NotFoundError);
   });
 });

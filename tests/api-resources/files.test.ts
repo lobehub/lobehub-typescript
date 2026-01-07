@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Lobehub, { toFile } from '@lobehub/openapi-typescript';
+import Lobehub, { toFile } from 'lobehub';
 
 const client = new Lobehub({
   apiKey: 'My API Key',
@@ -37,7 +37,13 @@ describe('resource files', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.files.list(
-        { fileType: 'fileType', page: 1, pageSize: 1, search: 'search', userId: 'userId' },
+        {
+          fileType: 'fileType',
+          page: 1,
+          pageSize: 1,
+          search: 'search',
+          userId: 'userId',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Lobehub.NotFoundError);
@@ -94,7 +100,6 @@ describe('resource files', () => {
       knowledgeBaseId: 'knowledgeBaseId',
       sessionId: 'sessionId',
       skipCheckFileType: true,
-      skipExist: true,
     });
   });
 
@@ -114,7 +119,7 @@ describe('resource files', () => {
   test.skip('getPresignedURL: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.files.getPresignedURL('id', { expiresIn: 0 }, { path: '/_stainless_unknown_path' }),
+      client.files.getPresignedURL('id', { expiresIn: 1 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Lobehub.NotFoundError);
   });
 
@@ -160,7 +165,6 @@ describe('resource files', () => {
       knowledgeBaseId: 'knowledgeBaseId',
       sessionId: 'sessionId',
       skipCheckFileType: true,
-      skipExist: true,
     });
   });
 });

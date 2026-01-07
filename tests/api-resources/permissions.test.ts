@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Lobehub from '@lobehub/openapi-typescript';
+import Lobehub from 'lobehub';
 
 const client = new Lobehub({
   apiKey: 'My API Key',
@@ -10,7 +10,11 @@ const client = new Lobehub({
 describe('resource permissions', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.permissions.create({ category: 'category', code: 'code', name: 'name' });
+    const responsePromise = client.permissions.create({
+      category: 'category',
+      code: 'code',
+      name: 'name',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -87,7 +91,13 @@ describe('resource permissions', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.permissions.list(
-        { active: true, category: 'category', keyword: 'keyword', page: 1, pageSize: 1 },
+        {
+          active: true,
+          category: 'category',
+          keyword: 'keyword',
+          page: 1,
+          pageSize: 1,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Lobehub.NotFoundError);

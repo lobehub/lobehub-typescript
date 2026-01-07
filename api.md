@@ -51,25 +51,28 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/files.ts">APIResponseBatchFileUpload</a></code>
+- <code><a href="./src/resources/files.ts">APIResponseBatchGetFiles</a></code>
 - <code><a href="./src/resources/files.ts">APIResponseFileDetail</a></code>
+- <code><a href="./src/resources/files.ts">APIResponseFileList</a></code>
+- <code><a href="./src/resources/files.ts">APIResponseFileParse</a></code>
+- <code><a href="./src/resources/files.ts">APIResponseFileURL</a></code>
+- <code><a href="./src/resources/files.ts">BatchFileUpload</a></code>
+- <code><a href="./src/resources/files.ts">BatchGetFiles</a></code>
 - <code><a href="./src/resources/files.ts">File</a></code>
 - <code><a href="./src/resources/files.ts">FileDetail</a></code>
 - <code><a href="./src/resources/files.ts">FileParse</a></code>
-- <code><a href="./src/resources/files.ts">FileListResponse</a></code>
-- <code><a href="./src/resources/files.ts">FileBatchGetResponse</a></code>
-- <code><a href="./src/resources/files.ts">FileBatchUploadResponse</a></code>
-- <code><a href="./src/resources/files.ts">FileGetPresignedURLResponse</a></code>
-- <code><a href="./src/resources/files.ts">FileParseContentResponse</a></code>
+- <code><a href="./src/resources/files.ts">FileURL</a></code>
 
 Methods:
 
 - <code title="get /files/{id}">client.files.<a href="./src/resources/files.ts">retrieve</a>(id) -> APIResponseFileDetail</code>
-- <code title="get /files">client.files.<a href="./src/resources/files.ts">list</a>({ ...params }) -> FileListResponse</code>
+- <code title="get /files">client.files.<a href="./src/resources/files.ts">list</a>({ ...params }) -> APIResponseFileList</code>
 - <code title="delete /files/{id}">client.files.<a href="./src/resources/files.ts">delete</a>(id) -> APIResponseVoid</code>
-- <code title="post /files/queries">client.files.<a href="./src/resources/files.ts">batchGet</a>({ ...params }) -> FileBatchGetResponse</code>
-- <code title="post /files/batches">client.files.<a href="./src/resources/files.ts">batchUpload</a>({ ...params }) -> FileBatchUploadResponse</code>
-- <code title="get /files/{id}/url">client.files.<a href="./src/resources/files.ts">getPresignedURL</a>(id, { ...params }) -> FileGetPresignedURLResponse</code>
-- <code title="post /files/{id}/parses">client.files.<a href="./src/resources/files.ts">parseContent</a>(id, { ...params }) -> FileParseContentResponse</code>
+- <code title="post /files/queries">client.files.<a href="./src/resources/files.ts">batchGet</a>({ ...params }) -> APIResponseBatchGetFiles</code>
+- <code title="post /files/batches">client.files.<a href="./src/resources/files.ts">batchUpload</a>({ ...params }) -> APIResponseBatchFileUpload</code>
+- <code title="get /files/{id}/url">client.files.<a href="./src/resources/files.ts">getPresignedURL</a>(id, { ...params }) -> APIResponseFileURL</code>
+- <code title="post /files/{id}/parses">client.files.<a href="./src/resources/files.ts">parseContent</a>(id, { ...params }) -> APIResponseFileParse</code>
 - <code title="post /files">client.files.<a href="./src/resources/files.ts">upload</a>({ ...params }) -> APIResponseFileDetail</code>
 
 # Messages

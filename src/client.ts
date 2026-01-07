@@ -27,20 +27,23 @@ import {
   CreateAgent,
 } from './resources/agents';
 import {
+  APIResponseBatchFileUpload,
+  APIResponseBatchGetFiles,
   APIResponseFileDetail,
+  APIResponseFileList,
+  APIResponseFileParse,
+  APIResponseFileURL,
+  BatchFileUpload,
+  BatchGetFiles,
   File,
   FileBatchGetParams,
-  FileBatchGetResponse,
   FileBatchUploadParams,
-  FileBatchUploadResponse,
   FileDetail,
   FileGetPresignedURLParams,
-  FileGetPresignedURLResponse,
   FileListParams,
-  FileListResponse,
   FileParse,
   FileParseContentParams,
-  FileParseContentResponse,
+  FileURL,
   FileUploadParams,
   Files,
 } from './resources/files';
@@ -244,7 +247,7 @@ export class Lobehub {
   baseURL: string;
   maxRetries: number;
   timeout: number;
-  logger: Logger | undefined;
+  logger: Logger;
   logLevel: LogLevel | undefined;
   fetchOptions: MergedRequestInit | undefined;
 
@@ -899,15 +902,18 @@ export declare namespace Lobehub {
 
   export {
     Files as Files,
+    type APIResponseBatchFileUpload as APIResponseBatchFileUpload,
+    type APIResponseBatchGetFiles as APIResponseBatchGetFiles,
     type APIResponseFileDetail as APIResponseFileDetail,
+    type APIResponseFileList as APIResponseFileList,
+    type APIResponseFileParse as APIResponseFileParse,
+    type APIResponseFileURL as APIResponseFileURL,
+    type BatchFileUpload as BatchFileUpload,
+    type BatchGetFiles as BatchGetFiles,
     type File as File,
     type FileDetail as FileDetail,
     type FileParse as FileParse,
-    type FileListResponse as FileListResponse,
-    type FileBatchGetResponse as FileBatchGetResponse,
-    type FileBatchUploadResponse as FileBatchUploadResponse,
-    type FileGetPresignedURLResponse as FileGetPresignedURLResponse,
-    type FileParseContentResponse as FileParseContentResponse,
+    type FileURL as FileURL,
     type FileListParams as FileListParams,
     type FileBatchGetParams as FileBatchGetParams,
     type FileBatchUploadParams as FileBatchUploadParams,
