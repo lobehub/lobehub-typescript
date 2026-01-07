@@ -1,5 +1,35 @@
 # Changelog
 
+## 1.2.0 (2026-01-07)
+
+Full Changelog: [v1.1.0...v1.2.0](https://github.com/lobehub/lobehub-typescript/compare/v1.1.0...v1.2.0)
+
+### Features
+
+* **api:** api update ([b2078a3](https://github.com/lobehub/lobehub-typescript/commit/b2078a3d8aece29eb6c0454b09d81ec1350de60d))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([ffc2e07](https://github.com/lobehub/lobehub-typescript/commit/ffc2e079f851e741ec51983f65cd5314817702ef))
+* **mcp:** return correct lines on typescript errors ([9f11501](https://github.com/lobehub/lobehub-typescript/commit/9f11501d03ec62c5f7ee875ff48e5075cd0b79b4))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([e75c81d](https://github.com/lobehub/lobehub-typescript/commit/e75c81dfe310b55700ddae52960a0f7334aad685))
+* **client:** fix logger property type ([a80ab81](https://github.com/lobehub/lobehub-typescript/commit/a80ab81fde52591305db3e46778fff4392946580))
+* **internal:** codegen related update ([9c3b142](https://github.com/lobehub/lobehub-typescript/commit/9c3b1423a76105551c6f46ddfe034b0af9a1b064))
+* **internal:** codegen related update ([bf562d1](https://github.com/lobehub/lobehub-typescript/commit/bf562d1c8ca2b0063e372ce3b697e46098bc0812))
+* **internal:** codegen related update ([f70684d](https://github.com/lobehub/lobehub-typescript/commit/f70684daaf74782c4d7869566a301c492f564510))
+* **internal:** remove .eslintcache ([7df328f](https://github.com/lobehub/lobehub-typescript/commit/7df328fae80d7c274ecf561d420000ee92f04834))
+* **internal:** upgrade eslint ([3173b19](https://github.com/lobehub/lobehub-typescript/commit/3173b190acae9842c76f81c6aca89dd484dced4e))
+* **internal:** use npm pack for build uploads ([aaaef3e](https://github.com/lobehub/lobehub-typescript/commit/aaaef3eb9c39559f343dcb7dfea441cd3cb15281))
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([79e9c71](https://github.com/lobehub/lobehub-typescript/commit/79e9c71cc05facd6bd53770bbffd91d3a378e81d))
+* update SDK settings ([8d448c0](https://github.com/lobehub/lobehub-typescript/commit/8d448c022488f3138658d9a840b5bec76f4f2bba))
+* update SDK settings ([e28b6b9](https://github.com/lobehub/lobehub-typescript/commit/e28b6b9a851ea3c24789626416c271470c8e3ea0))
+* update SDK settings ([b5684ed](https://github.com/lobehub/lobehub-typescript/commit/b5684edfebf6aaab24a7b7e8e0a04d2d1cb2c582))
+
 ## 1.1.0 (2025-09-28)
 
 Full Changelog: [v1.0.0...v1.1.0](https://github.com/lobehub/lobehub-typescript/compare/v1.0.0...v1.1.0)
