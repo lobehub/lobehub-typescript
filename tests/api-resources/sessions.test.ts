@@ -61,7 +61,14 @@ describe('resource sessions', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.sessions.list(
-        { agentId: 'agentId', ids: 'ids', keyword: 'keyword', page: 1, pageSize: 1, userId: 'userId' },
+        {
+          agentId: 'agentId',
+          ids: 'ids',
+          keyword: 'keyword',
+          page: 1,
+          pageSize: 1,
+          userId: 'userId',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Lobehub.NotFoundError);
@@ -81,7 +88,14 @@ describe('resource sessions', () => {
 
   // Prism tests are disabled
   test.skip('batchUpdate: only required params', async () => {
-    const responsePromise = client.sessions.batchUpdate({ body: [{ id: 'id', data: {} }] });
+    const responsePromise = client.sessions.batchUpdate({
+      body: [
+        {
+          id: 'id',
+          data: {},
+        },
+      ],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

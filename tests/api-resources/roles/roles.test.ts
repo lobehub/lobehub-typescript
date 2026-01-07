@@ -83,7 +83,13 @@ describe('resource roles', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.roles.list(
-        { active: true, keyword: 'keyword', page: 1, pageSize: 1, system: true },
+        {
+          active: true,
+          keyword: 'keyword',
+          page: 1,
+          pageSize: 1,
+          system: true,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Lobehub.NotFoundError);

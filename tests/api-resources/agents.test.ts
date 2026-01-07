@@ -88,7 +88,14 @@ describe('resource agents', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.agents.list({ keyword: 'keyword', page: 1, pageSize: 1 }, { path: '/_stainless_unknown_path' }),
+      client.agents.list(
+        {
+          keyword: 'keyword',
+          page: 1,
+          pageSize: 1,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Lobehub.NotFoundError);
   });
 

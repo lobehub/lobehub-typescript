@@ -167,7 +167,9 @@ const response = await client.users.retrieveCurrent().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: apiResponseUser, response: raw } = await client.users.retrieveCurrent().withResponse();
+const { data: apiResponseUser, response: raw } = await client.users
+  .retrieveCurrent()
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(apiResponseUser);
 ```
