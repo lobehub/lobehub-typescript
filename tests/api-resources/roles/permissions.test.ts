@@ -38,7 +38,11 @@ describe('resource permissions', () => {
     await expect(
       client.roles.permissions.list(
         1,
-        { keyword: 'keyword', page: 1, pageSize: 1 },
+        {
+          keyword: 'keyword',
+          page: 1,
+          pageSize: 1,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Lobehub.NotFoundError);
